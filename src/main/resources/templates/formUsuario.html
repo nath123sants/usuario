@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  
+<head>
+<title>Cadastro de Usuario</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet"/>
+<link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"
+	media="screen,projection" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="stylesheet" href="styleCss.css"/>
+</head>
+
+<body>
+<header>
+ <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Cadastro de Usuario</a>
+    </div>
+  </nav>
+</header>
+
+<br/>
+
+<th:block th:include="mensagemValidacao"></th:block>
+<br/>
+<form class="container detalhesUsuario" method="post" >
+	<div class="row">
+		Nome:<input type="text" value="" name="nome"/>
+		<div class="input-field col s6">
+			Data de Nascimento:<input type="text" value="" name="nascimento"/>
+		</div>
+		<div class="input-field col s6">
+			CPF:<input type="text" value="" name="cpf" placeholder="000.000.000-00"/>
+		</div>
+		<div class="input-field col s6">
+			Email:<input type="text" value="" name="email"/>
+		</div>
+		<div class="input-field col s6">
+			Telefone:<input type="text" value="" name="telefone" placeholder="0000-0000" class="validate"/>
+		</div>
+	</div>
+	<button class="waves-effect waves-light btn" type="submit">Salvar</button>
+
+</form>
+	<br/>
+	<br/>
+	<table class="container">
+	
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Data de Nascimento</th>
+				<th>CPF</th>
+				<th>Email</th>
+				<th>Telefone</th>
+				<th>Deletar</th>
+				<th>Alterar</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="usuario :  ${usuarios}">
+				<td><span th:text="${usuario.nome}"></span></td>
+				<td><span th:text="${usuario.nascimento}"></span></td>
+				<td><span th:text="${usuario.cpf}"></span></td>
+				<td><span th:text="${usuario.email}"></span></td>
+				<td><span th:text="${usuario.telefone}"></span></td>
+				<td><a class="waves-effect waves-light btn-small" th:href="${(#mvc.url('UC#deletarUsuario').arg(0, usuario.id)).build()}"> <i class="material-icons left">delete</i></a></td>
+			<!-- <td><a class="waves-effect waves-light btn-small" th:href="${(#mvc.url('UC#alterarUsuario').arg(0, usuario.id)).build()}"> <i class="material-icons left">edit</i></a></td> -->	
+			</tr>	
+		</tbody>
+	</table>
+	
+	
+<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>
+
+</html>
